@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding boxes</title>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Neucha&display=swap');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+
+        .main-wrapper {
+            display: grid;
+            place-content: center;
+
+            & h1,
+            h2 {
+                font-family: 'Cinzel', serif;
+                transition: all 300ms linear;
+            }
+
+            .top-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 999;
+                background: #dce2f2;
+                height: 100px;
+                width: 100%;
+                padding: 0 40px;
+
+
+                & .positin-fixed {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    & a {
+                        text-decoration: none;
+
+                        & button.btn {
+                            width: 120px;
+                            height: 40px;
+                            border: none;
+                            border-radius: 8px;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            cursor: pointer;
+                            color: darkblue;
+                            font-family: sans-serif;
+                            font-weight: 600;
+                            transition: all 300ms linear;
+
+                            &:hover {
+                                background-color: #2D3142;
+                                color: #fff;
+                            }
+
+                        }
+                    }
+                }
+
+                @media(max-width:767px) {
+                    & {
+                        height: 150px;
+                        padding: 0 10px;
+
+                        & .positin-fixed {
+                            flex-direction: column;
+                            text-align: center;
+                        }
+
+                        & h1 {
+                            font-size: 26px;
+                        }
+                    }
+
+                }
+            }
+
+
+            & .container {
+                max-width: 1440px;
+                padding: 20px 40px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                margin-top: 100px;
+
+                & .custom-box {
+                    width: 30%;
+                    height: 300px;
+                    padding: 10px 15px;
+                    background: green;
+                    color: #fff;
+                    border-radius: 12px;
+                    margin-bottom: 25px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    position: relative;
+                    z-index: 9;
+                    transition: all 400ms linear;
+
+                    &:hover {
+                        background: rebeccapurple;
+
+                        .close-btn {
+                            opacity: 1;
+                        }
+
+                        & h2 {
+                            transform: translateY(-10px);
+                        }
+                    }
+
+                    & .close-btn {
+                        z-index: 99;
+                        position: absolute;
+                        top: -5px;
+                        right: -10px;
+                        opacity: 0;
+                        transition: all 400ms linear;
+
+
+                        & i {
+                            color: black;
+                            font-size: 25px;
+                            cursor: pointer;
+                        }
+                    }
+
+
+                    & p {
+                        font-family: 'Neucha', cursive;
+                        font-size: 16px;
+                    }
+                }
+
+                @media(max-width:767px) {
+                    & {
+                        margin-top: 150px;
+                    }
+                }
+
+            }
+
+
+            & .container.horizontally-scroll {
+                height: 600px;
+                overflow-x: hidden;
+                overflow-y: scroll;
+
+
+                &::-webkit-scrollbar {
+                    width: 16px;
+
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: #ffffff;
+
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: #8f54a0;
+                    border-radius: 10px;
+                    border: 3px solid #ffffff;
+                }
+
+                @media(max-width: 767px) {
+                    &::-webkit-scrollbar {
+                        display: none;
+
+                    }
+
+                    &::-webkit-scrollbar-track {
+                        display: none;
+
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        display: none;
+                    }
+
+                    & h2 {
+                        font-size: 20px;
+                        text-align: center;
+                    }
+
+                    & p {
+                        text-align: center;
+                    }
+
+                    & .custom-box {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .popup-container {
+                transition: all 0.3s ease-in-out;
+                position: fixed;
+                z-index: 9999;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(21, 17, 17, 0.61);
+                display: flex;
+                align-items: center;
+
+                & .popup-content {
+                    background-color: #fefefe;
+                    margin: auto;
+                    padding: 0px 20px 25px 20px;
+                    border: 1px solid #888;
+                    width: 50%;
+
+                    & p {
+                        font-size: 17px;
+                        padding: 10px;
+                        line-height: 20px;
+                    }
+
+                    & a.close {
+                        color: #aaaaaa;
+                        float: right;
+                        font-size: 28px;
+                        font-weight: bold;
+                        background: none;
+                        padding: 0;
+                        margin: 0;
+                        text-decoration: none;
+
+                        &:hover {
+                            color: #333;
+                        }
+
+                        & span:hover,
+                        span:focus {
+                            color: #000;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                    }
+
+                    & form {
+                        display: flex;
+                        align-items: center;
+                        gap: 25px;
+
+                        & input.form-control {
+                            width: 60%;
+                            height: 40px;
+                            border-radius: 8px;
+                            border: 2px solid black;
+                            padding-left: 20px;
+                            font-size: 20px;
+                        }
+
+                        & .savebtn {
+                            width: 120px;
+                            height: 40px;
+                            border: none;
+                            border-radius: 8px;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            cursor: pointer;
+                            color: black;
+                            font-family: sans-serif;
+                            font-weight: 600;
+                            transition: all 300ms linear;
+
+                        }
+
+                        @media (max-width:767px) {
+                            & {
+                                flex-direction: column;
+
+                                & input.form-control {
+                                    width: 100%;
+                                }
+
+                                & .savebtn {
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+</style>
+
+<body ng-app="myAppBox" ng-controller="boxControl">
+    <div class="main-wrapper">
+        <!-- top header -->
+        <header>
+            <div class="top-header">
+                <div class="positin-fixed">
+                    <div class="leftHeaderDiv">
+                        <h1>Would you like to write a title</h1>
+                    </div>
+                    <div class="rightHeaderDiv">
+                        <a href="#" ng-click="openPopup()"><button class="btn">Add more</button></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- boxes -->
+        <div class="container horizontally-scroll">
+            <div class="custom-box" ng-repeat="title in allTitles track by $index">
+                <div class="close-btn" ng-click="removeTitle(title)"><i class="far fa-times-circle"></i></div>
+                <h2 class="title">{{title}}</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero vitae, tempora exercitationem nulla
+                    incidunt excepturi blanditiis ratione illum, velit, accusantium numquam dolor dolore! Autem dolorem
+                    quo quam modi at nisi.</p>
+            </div>
+        </div>
+
+        <!-- popup -->
+        <div class="popup-container popup-style-5" ng-show="popup == 1">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <a class="close" ng-click="closePopup()">&times;</a>
+                    <h2>Title</h2>
+                </div>
+                <form>
+                    <input type="text" class="form-control" ng-model="title" minlength="5" required>
+                    <button type="submit" class="savebtn" ng-click="saveClicked()">Save</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var app = angular.module('myAppBox', []);
+        app.controller('boxControl', function ($scope) {
+
+            var defaultTitles = ['hello world', 'title1', 'title2'];
+            // local storage function
+            $scope.getTitles = function () {
+                if (!JSON.parse(localStorage.getItem('titles'))) {
+                    window.localStorage.setItem('titles', JSON.stringify(defaultTitles))
+                }
+                $scope.allTitles = JSON.parse(localStorage.getItem('titles'))
+            }
+
+            // save title
+            $scope.saveClicked = function () {
+                tempTitle = JSON.parse(localStorage.getItem('titles'))
+                tempTitle.push($scope.title)
+                window.localStorage.setItem('titles', JSON.stringify(tempTitle))
+                $scope.getTitles()
+                $scope.closePopup()
+                $scope.title = '';
+            }
+            // remove title
+            $scope.removeTitle = function (title) {
+                tempTitle = JSON.parse(localStorage.getItem('titles'))
+                var index = tempTitle.findIndex(x => x === title)
+                tempTitle.splice(index, 1);
+                window.localStorage.setItem('titles', JSON.stringify(tempTitle))
+                $scope.getTitles()
+            }
+            $scope.openPopup = function () {
+                $scope.popup = 1;
+            }
+            $scope.closePopup = function () {
+                $scope.popup = 0;
+            }
+            $scope.init = function () {
+                $scope.getTitles()
+            }
+            $scope.init()
+
+        })
+    </script>
+</body>
+
+</html>

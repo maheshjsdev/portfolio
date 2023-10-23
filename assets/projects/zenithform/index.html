@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith | Form</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+</head>
+
+<body bgcolor="red">
+
+    <main ng-app="myApp">
+        <div class="home" ng-controller="Ctrol">
+            <div class="container" ng-show="page=='page1'">
+                <div class="leftDiv">
+                    <div class="leftDivInner">
+                        <div class="brand"><a href="#"><img src="./assets/img/logo.svg"></a></div>
+                        <h1 class="heading">GET<br>
+                            A QUOTE</h1>
+                    </div>
+                </div>
+                <div class="rightDiv">
+                    <div class="progressBarBlock">
+                        <div class="formStepheadBlock">
+                            <div class="headingFlex">
+                                <h3 class="formStepHead">Step 1</h3>
+                                <p>Tell us about you.</p>
+                            </div>
+                            <div class="headingFlex">
+                                <h3 class="formStepHead opcity" id="formHead1">Step 2</h3>
+                                <p class="opcity" id="formHead1">Tell us about your practice(s).</p>
+                            </div>
+
+                        </div>
+                        <div class="progressBar">
+                            <span class="bar" id="bar1"></span>
+                            <span class="bar opcity" id="bar2"></span>
+                        </div>
+                    </div>
+                    <form name="personalInfoForm" class="commonForm" ng-show="step=='step1'" novalidate>
+                        <input type="text" name="name" placeholder="Your Name *" ng-model="name" required />
+                        <span class="error"
+                            ng-show="(personalInfoForm.name.$touched || personalInfoForm.$submitted) && personalInfoForm.name.$invalid">
+                            <span class="borderRed"></span></span>
+                        <input type="text" name="organization" placeholder="Organization Name" ng-model="organization">
+                        <span class="error"></span>
+
+                        <input type="number" name="phone" placeholder="Phone Number *" ng-model="phone" required />
+                        <span class="error"
+                            ng-show="(personalInfoForm.phone.$touched || personalInfoForm.$submitted) && personalInfoForm.phone.$invalid"><span
+                                class="borderRed"></span></span>
+
+                        <input type="email" name="email" placeholder="Email Address *" ng-model="email" required />
+                        <span class="error"
+                            ng-show="(personalInfoForm.email.$touched || personalInfoForm.$submitted) && personalInfoForm.email.$invalid"><span
+                                class="borderRed"></span></span>
+
+                        <button class="commonFormBtn" type="submit" ng-click="nextClicked()">Next step</button>
+                    </form>
+                    <form name="practiceInfoForm" ng-show="step=='step2'" class="commonForm" novalidate>
+                        <div class="practiceAddBlock">
+                            <div class="counterDivFlex">
+                                <span class="placeholder">Amount of Practices *</span>
+                                <p class="counterDiv">{{practiceNumber}}</p>
+                            </div>
+                            <div class="practiceBtnFlex">
+                                <button type="button" class="practiceBtn" ng-click="remove()">-</button>
+                                <button type="button" ng-model="numberAdd" class="practiceBtn"
+                                    ng-click="add()">+</button>
+                            </div>
+                        </div>
+                        <div ng-repeat="item in items">
+                            <input type="text" name="practiceName" ng-model="practiceNamemodel[$index]"
+                                placeholder="{{item.placeholder}}{{$index+1+' Name*'}}" required />
+                            <!-- <span ng-show="practiceInfoForm.practiceName.$touched">required</span> -->
+                        </div>
+                        <input type="submit" value="Submit & get qoute" class="commonFormBtn"
+                            ng-click="submitClicked()" />
+                    </form>
+                </div>
+            </div>
+            <div class="backToHomePage" ng-show="page=='page2'">
+                <div class="brand"><a href="#"><img src="./assets/img/logo2.svg"></a></div>
+                <div class="circleImg"><img src="./assets/img/circle.svg"></div>
+                <h2 class="heading2">GENERATING QUOTE...</h2>
+                <p>A Zenith IT specialist is creating a custom quote for you and will reach out to you as soon as it is
+                    ready.</p>
+                <p class="marginTop">Cheers,</p>
+                <p>Team Zenith</p>
+                <button class="commonFormBtn" ng-click="backHomePage()">BACK TO THE HOME PAGE</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        var app = angular.module('myApp', [])
+        app.controller('Ctrol', function ($scope) {
+            $scope.step = 'step1';
+            $scope.page = 'page1';
+            $scope.practiceNamemodel = [];
+            $scope.error = true;
+            // form step 1
+            $scope.nextClicked = function () {
+                if (!$scope.personalInfoForm.$valid) {
+                    return;
+                }
+                $scope.step = 'step2';
+                $("#formHead1, #formPara1, #bar2").removeClass('opcity');
+            }
+
+            // form step 2
+            // form submit function
+            $scope.submitClicked = function () {
+                var stats = false;
+                for (var i = 0; i < $scope.items.length; i++) {
+
+                    if ($scope.practiceNamemodel[i] == '' || $scope.practiceNamemodel[i] == undefined || $scope.practiceNamemodel[i] == null) {
+                        alert("This field is required");
+                        stats = true;
+                    }
+                }
+
+                if (stats) {
+                    return;
+                }
+
+
+
+
+                alert("scccessfully submit");
+                $scope.page = 'page2';
+                $scope.step = 'step1';
+                $("#formHead1, #formPara1, #bar2").addClass('opcity');
+
+
+
+            }
+            $scope.items = [];
+            $scope.practiceNumber = 0;
+            $scope.add = function () {
+                $scope.items.push(
+                    { id: 1, text: '', placeholder: 'Practice #' }
+                );
+                $scope.practiceNumber++;
+            };
+
+            $scope.remove = function (index) {
+                $scope.items.splice(index, 1);
+                $scope.practiceNumber--;
+
+            };
+
+            // back top home page clicked
+            $scope.backHomePage = function () {
+                $scope.page = 'page1';
+
+                $scope.personalInfoForm && $scope.personalInfoForm.$setPristine();
+                $scope.personalInfoForm && $scope.personalInfoForm.$setUntouched();
+                $scope.name = '';
+                $scope.organization = '';
+                $scope.email = '';
+                $scope.phone = '';
+                $scope.practiceNamemodel = [];
+                $scope.items = [];
+                $scope.practiceNumber = 0;
+
+            }
+
+        });
+    </script>
+</body>
+
+</html>

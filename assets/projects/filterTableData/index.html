@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter table</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+<style>
+    input#myInput {
+        margin: 15px 0;
+        height: 50px;
+        padding-left: 20px;
+        font-size: 20px;
+    }
+
+
+    h1 {
+        text-align: center;
+        margin: 20px 0;
+    }
+</style>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="container">
+        <h1>Students List</h1>
+        <input type="text" class="form-control" id="myInput" placeholder="Name..." ng-keyup="serachFun()">
+        <table class="table table-success table-striped" id="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Student name</th>
+                    <th scope="col">Stream</th>
+                    <th scope="col">Hobby</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in studentData">
+                    <th>{{$index}}</th>
+                    <td>{{student.name}}</td>
+                    <td>{{student.stream}}</td>
+                    <td>{{student.hobby}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.studentData = [
+                { name: "Nitin", stream: "science", hobby: "Cricket" },
+                { name: "Raju", stream: "arts", hobby: "football" },
+                { name: "Akash", stream: "commerce", hobby: "traveling" },
+                { name: "Pal", stream: "commerce", hobby: "singing" },
+                { name: "Ram", stream: "commerce", hobby: "writing" },
+                { name: "Shyam", stream: "science", hobby: "eating" },
+                { name: "Sawraj", stream: "commerce", hobby: "playing" },
+                { name: "Sourav", stream: "science", hobby: "swiming" },
+                { name: "gourav", stream: "commerce", hobby: "hockey" },
+                { name: "Anil", stream: "arts", hobby: "Cricket" },
+                { name: "Amit", stream: "science", hobby: "Cricket" },
+                { name: "Amir", stream: "arts", hobby: "writing" },
+                { name: "Jitender", stream: "science", hobby: "Cricket" },
+                { name: "Satender", stream: "commerce", hobby: "playing" }
+            ];
+            // console.log(studentData)
+            $scope.serachFun = function(){
+                var filter = document.getElementById("myInput").value.toUpperCase();
+                console.log(filter)
+                var table = document.getElementById("table");
+                var tr = table.getElementsByTagName("tr");
+                for (var i = 0; i < tr.length; i++) {
+                    var td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        var textValue = td.textContent || td.innerHTML;
+                        if (textValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

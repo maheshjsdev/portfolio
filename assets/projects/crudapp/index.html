@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    tr td:nth-child(2) {
+        text-transform: capitalize;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1060;
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        outline: 0;
+        transition: all 500ms ease-in-out;
+
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.6);
+        transition: opacity 500ms;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+    }
+
+    .valid-feedback {
+        display: inline-block;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: .875em;
+        color: #198754;
+    }
+</style>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="mainDiv" ng-class="{'overlay': isOverlay}">
+        <div class="container my-3">
+            <div class="header my-3">
+                <div class="leftHeaderDiv">
+                    <h1>Employees List</h1>
+                </div>
+                <div class="rightHeaderDiv">
+                    <button class="btn-warning btn mx-3" ng-click="recordClear()">Clear</button>
+                    <button class="btn-secondary btn" ng-click="openPopup()">Add New</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Creation Date</th>
+                        <th scope="col">Update / Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in allRecords track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{data.fname}} {{data.lname}}</td>
+                        <td>{{data.email}}</td>
+                        <td>{{data.phone}}</td>
+                        <td>{{data.salary | currency:'&#8377;'}}</td>
+                        <td>{{data.creationdate | date:'dd MMM yyyy '}}</td>
+                        <td><button class="btn-info btn" ng-click="recordEdit(data)">Edit</button>
+                            |
+                            <button class="btn-danger btn" ng-click="deletePopupClicked(data.id)">Delete</button>
+                        </td>
+                        <!-- Confrim delete Box -->
+                        <div class="modal" ng-show="confirmBox">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Are you sure delete this
+                                            record</h5>
+                                        <button type="button" class="btn-close" ng-click="closePopup()"></button>
+                                    </div>
+
+                                    <div class="modal-footer d-flex justify-content-start">
+                                        <button type="button" class="btn btn-secondary"
+                                            ng-click="closePopup()">Close</button>
+                                        <button class="btn-danger btn" ng-click="confrimDeleteBox()">Delete</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+
+                </tbody>
+            </table>
+            <ul ng-repeat="text in auditRecords track by $index">
+                <li class="list-group-item mb-2 bg-secondary text-white">{{text}}</li>
+            </ul>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" ng-show="activeTab === 1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Form Detalis</h5>
+                        <button type="button" class="btn-close" ng-click="closePopup()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="userForm" novalidate>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" name="fname" placeholder="First Name"
+                                    ng-minlength="3" ng-model="user.fname" required>
+                                <div class="valid-feedback" ng-show="(userForm.fname.$touched || userForm.$submitted) && userForm.fname.$invalid || 
+                                     userForm.fname.$minlength">
+                                    Please enter minimum 3 char of first name
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last Name" ng-model="user.lname">
+                            </div>
+                            <div class="form-group my-3">
+                                <input type="email" class="form-control" name="email" placeholder="Email"
+                                    ng-model="user.email" required>
+                                <div class="valid-feedback"
+                                    ng-show="(userForm.email.$touched || userForm.$submitted) && userForm.email.$invalid">
+                                    Please enter your email
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" name="phone" placeholder="Phone"
+                                    ng-model="user.phone" mask="(999) 999-9999" required>
+                                <div class="valid-feedback"
+                                    ng-show="(userForm.phone.$touched || userForm.$submitted) && userForm.phone.$invalid">
+                                    Please enter minimum 10 digit of phone no
+                                </div>
+
+                            </div>
+                            <div class="form-group my-3">
+                                <input type="number" class="form-control" name="salary" placeholder="Salary"
+                                    ng-model="user.salary">
+                            </div>
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="date" placeholder="Creation Date"
+                                    ng-model="user.creationdate" required>
+                                <div class="valid-feedback"
+                                    ng-show="(userForm.date.$touched || userForm.$submitted) && userForm.date.$invalid">
+                                    Please enter creation date
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-secondary" ng-click="closePopup()">Close</button>
+                                <button type="submit" class="btn btn-primary" ng-show="acitveBtn === 1"
+                                    ng-click="saveRecord()">Save</button>
+
+                                <button type="button" class="btn btn-primary" ng-show="acitveBtn === 2"
+                                    ng-click="updateRecord()">Update</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
+        <script>
+            var app = angular.module("myApp", ['ngMask']);
+            app.controller("myCtrl", function ($scope, $filter) {
+
+                var defaultRecords = [
+                    {
+                        id: 1,
+                        fname: 'raju',
+                        lname: 'sagar',
+                        email: 'raju@gmail.com',
+                        phone: 9592826515,
+                        salary: 20000,
+                        creationdate: '2015-02-21',
+                    },
+                    {
+                        id: 2,
+                        fname: 'nitin',
+                        lname: 'kumar',
+                        email: 'nitin@gmail.com',
+                        phone: 3265826515,
+                        salary: 22000,
+                        creationdate: '2023-05-23'
+                    },
+                    {
+                        id: 3,
+                        fname: 'sawraj',
+                        lname: 'singh',
+                        email: 'sawraj@gmail.com',
+                        phone: 1234826515,
+                        salary: 25000,
+                        creationdate: '2023-05-23'
+                    },
+                    {
+                        id: 4,
+                        fname: 'anil',
+                        lname: 'kumar',
+                        email: 'anil@gmail.com',
+                        phone: 9876826515,
+                        salary: 26000,
+                        creationdate: '2023-05-23'
+                    },
+                    {
+                        id: 5,
+                        fname: 'akash',
+                        lname: 'kumar',
+                        email: 'akash@gmail.com',
+                        phone: 4561826515,
+                        salary: 28000,
+                        creationdate: '2023-05-23'
+                    },
+                    {
+                        id: 6,
+                        fname: 'rupa',
+                        lname: 'kumari',
+                        email: 'rupa@gmail.com',
+                        phone: 9592123415,
+                        salary: 29000,
+                        creationdate: '2023-05-23'
+                    },
+                    {
+                        id: 7,
+                        fname: 'rohit',
+                        lname: 'dogra',
+                        email: 'rohit@gmail.com',
+                        phone: 9592824512,
+                        salary: 22000,
+                        creationdate: '2023-05-20'
+                    },
+                    {
+                        id: 8,
+                        fname: 'sonia',
+                        lname: 'rani',
+                        email: 'sonia@gmail.com',
+                        phone: 1456826515,
+                        salary: 30000,
+                        creationdate: '2023-05-18'
+                    },
+                    {
+                        id: 9,
+                        fname: 'amit',
+                        lname: 'thakur',
+                        email: 'thakur@gmail.com',
+                        phone: 6283826515,
+                        salary: 27000,
+                        creationdate: '2022-05-23'
+                    },
+                    {
+                        id: 10,
+                        fname: 'kavita',
+                        lname: 'devi',
+                        email: 'kavita@gmail.com',
+                        phone: 6245826515,
+                        salary: 31000,
+                        creationdate: '2023-09-05'
+                    }
+                ]
+
+                var defaultAudit = []
+                // get record
+                $scope.getRecord = function () {
+                    if (!JSON.parse(localStorage.getItem('crud'))) {
+                        window.localStorage.setItem('crud', JSON.stringify(defaultRecords));
+                    } else {
+                        $scope.allRecords = JSON.parse(localStorage.getItem('crud'));
+                    }
+                }
+                // get audit records
+                $scope.getAuditRecord = function () {
+                    if (!JSON.parse(localStorage.getItem('update'))) {
+                        window.localStorage.setItem('update', JSON.stringify(defaultAudit));
+                    } else {
+                        $scope.auditRecords = JSON.parse(localStorage.getItem('update'))
+                    }
+                }
+
+
+                // save record
+                $scope.saveRecord = function () {
+                    if (!$scope.userForm.$valid) {
+                        return false;
+                        
+                    }
+                    var tempRecords = JSON.parse(localStorage.getItem('crud'));
+                    var newRecord = {
+                        id: ((tempRecords || []).length) + 1,
+                        fname: ($scope.user.fname),
+                        lname: ($scope.user.lname),
+                        email: ($scope.user.email),
+                        phone: ($scope.user.phone),
+                        salary: ($scope.user.salary),
+                        creationdate: ($scope.user.creationdate)
+                    };
+                    tempRecords.push(newRecord);
+                    window.localStorage.setItem('crud', JSON.stringify(tempRecords));
+                    $scope.closePopup();
+                    $scope.getRecord();
+                }
+
+                // edit record
+                $scope.recordEdit = function (data) {
+                    $scope.oldData = '';
+                    $scope.openPopup()
+                    $scope.user = angular.copy(data);
+                    $scope.oldData = angular.copy(data);
+                    $scope.acitveBtn = 2;
+                    $scope.user.creationdate = new Date(data.creationdate);
+                }
+                // update record
+                $scope.updateRecord = function () {
+                    if (!$scope.userForm.$valid) {
+                        return false;
+                    }
+                    var tempRecords = JSON.parse(localStorage.getItem('crud'));
+                    var updatedUser = $scope.user;
+                    var index = tempRecords.findIndex(x => x.id === updatedUser.id);
+                    tempRecords[index] = updatedUser;
+                    window.localStorage.setItem('crud', JSON.stringify(tempRecords));
+                    $scope.saveAuditRecords($scope.oldData, $scope.user)
+                    $scope.getRecord();
+                    $scope.closePopup()
+                }
+
+                // delete popup clicked 
+                $scope.deletePopupClicked = function (id) {
+                    $scope.deleteId = id
+                    $scope.deletePopupOpen()
+                }
+                // confrim delete popup open 
+                $scope.confrimDeleteBox = function () {
+                    $scope.deleteRecord($scope.deleteId)
+                }
+                // delete record
+                $scope.deleteRecord = function (id) {
+                    var tempRecords = JSON.parse(localStorage.getItem('crud'));
+                    var filteredRecords = tempRecords.filter(item => item.id !== id);
+                    console.log(filteredRecords)
+                    window.localStorage.setItem('crud', JSON.stringify(filteredRecords));
+                    $scope.getRecord()
+                    $scope.deletePopupClose()
+                }
+
+                $scope.openPopup = function () {
+                    $scope.activeTab = 1;
+                    $scope.isOverlay = true;
+                    $scope.acitveBtn = 1;
+                    $scope.userForm && $scope.userForm.$setPristine();
+                    $scope.userForm && $scope.userForm.$setUntouched();
+                    $scope.user = {}
+                }
+                $scope.closePopup = function () {
+                    $scope.activeTab = 0;
+                    $scope.isOverlay = false;
+                    $scope.acitveBtn = 0;
+                    $scope.confirmBox = false;
+                }
+                $scope.deletePopupOpen = function () {
+                    $scope.isOverlay = true;
+                    $scope.confirmBox = true;
+
+                }
+                $scope.deletePopupClose = function () {
+                    $scope.isOverlay = false;
+                    $scope.confirmBox = false;
+                }
+                // save audit record
+                $scope.saveAuditRecords = function (obj1, obj2) {
+                    var tempAudit = JSON.parse(localStorage.getItem('update'))
+                    var changeText = '';
+                    for (const key in obj1) {
+                        if (obj1[key] !== obj2[key]) {
+                            changeText += (` ${key.toUpperCase()} Update from ${obj1[key]} to ${obj2[key]}. `)
+                        }
+                    }
+                    tempAudit.push(changeText)
+                    window.localStorage.setItem('update', JSON.stringify(tempAudit))
+                    $scope.getAuditRecord()
+                }
+
+                // set formatPhoneNumber
+                $scope.formatPhoneNumber = function (phoneStr) {
+                    return phoneStr = phoneStr.toString().replace(/(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
+                }
+
+                // localStorage recordClear
+                $scope.recordClear = function () {
+                    window.sessionStorage.removeItem('crud');
+                    window.localStorage.removeItem('update');
+                }
+
+                $scope.init = function () {
+                    $scope.getRecord();
+                    $scope.closePopup();
+                    $scope.getAuditRecord()
+                }
+                $scope.init();
+            });
+
+        </script>
+
+</body>
+
+</html>

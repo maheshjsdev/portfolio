@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown select</title>
+</head>
+<style>
+    body {
+        width: 100vw;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        margin: 0 auto;
+        width: 60vw;
+        padding: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    form {
+        background: aqua;
+        padding: 10px 20px;
+        width: 264px;
+    }
+
+    .dropdownBtn {
+        width: 235px;
+        height: 40px;
+        border-radius: 8px;
+        padding: 5px 0 0 10px;
+        border: 1px solid darkgrey;
+        cursor: pointer;
+        text-transform: capitalize;
+    }
+
+    .form-control {
+        position: relative;
+        padding-top: 1rem;
+    }
+
+    .form-input {
+        border: none;
+        border-bottom: 2px solid #4286f4;
+    }
+
+    .form-input:focus {
+        outline: none;
+    }
+
+    .form-label {
+        position: absolute;
+        left: 5px;
+        color: gray;
+        font-size: .7rem;
+        margin-top: -1rem;
+        transition: all 250ms ease-in-out;
+        top: 32px;
+        text-transform: capitalize;
+        cursor: pointer;
+
+
+    }
+
+    .form-input:placeholder-shown+.form-label {
+        cursor: text;
+        font-size: .9rem;
+        margin-top: 0;
+        color: #444;
+        cursor: pointer;
+    }
+
+
+
+
+    ul li {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+        border: 1px solid blue;
+        padding: 10px 10px;
+        width: 225px;
+        cursor: pointer;
+        text-transform: capitalize;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        height: 250px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    .listItemDiv {
+        display: block;
+    }
+</style>
+
+<body ng-app="myApp" ng-controller="control">
+    <div class="container">
+        <form>
+            <div class="form-control">
+                <input class="dropdownBtn form-input" name="name" placeholder=" "
+                    value="{{firstSelectCountry + selectMoreCountry}}" ng-click="openListClicked()" readonly>
+                <label for="name" ng-click="openListClicked()" class="form-label">Select your country</label>
+                <ul ng-show="activeList" class="listItemDiv">
+                    <li ng-repeat="country in arr track by $index" ng-click="selectClicked(country, country.isChecked)">
+                        <input type="checkbox" ng-model="country.isChecked"
+                            ng-click="selectClicked(country, isChecked)">{{country.country}}
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("control", function ($scope) {
+            // list of item 
+            $scope.arr = [
+                { id: 1, country: "india", isChecked: false },
+                { id: 2, country: "nepal", isChecked: false },
+                { id: 3, country: "japan", isChecked: false },
+                { id: 4, country: "sri lanka", isChecked: false },
+                { id: 5, country: "bhutan", isChecked: false },
+                { id: 6, country: "bangladesh", isChecked: false },
+                { id: 7, country: "north korea", isChecked: false },
+                { id: 8, country: "america", isChecked: false }
+            ]
+            // using country length array
+            let selectCountry = [];
+
+
+            // open list item function
+            $scope.openListClicked = function () {
+                $scope.activeList = !$scope.activeList;
+                $(".listItemDiv").show();
+            }
+
+            // dropdown list select function
+            $scope.selectClicked = function (item, check) {
+                let obj = item;
+                obj.isChecked = !obj.isChecked;
+                var findIndex = $scope.arr.findIndex(x => x.id === obj.id);
+                $scope.arr[findIndex] = obj;
+                checkCountriesLength(obj, check)
+                firstCoutryName($scope.arr)
+            }
+
+            // checking countries length function
+            function checkCountriesLength(item, check) {
+                if (check === false) {
+                    selectCountry.push(item.country)
+                }
+                if (check === true) {
+                    var findIndex = selectCountry.findIndex(x => x === item.country);
+                    selectCountry.splice(findIndex, 1);
+                }
+                var length = selectCountry.length
+                if (length > 1) {
+                    $scope.selectMoreCountry = `( + ${length - 1})`;
+                } else {
+                    $scope.selectMoreCountry = "";
+                }
+            }
+            // get first selected country name
+            function firstCoutryName(item) {
+                for (var key of item) {
+                    if (key.isChecked === true) {
+                        $scope.firstSelectCountry = key.country;
+                        break;
+                    } else {
+                        $scope.firstSelectCountry = "";
+                    }
+                }
+            }
+            // outside clicking function
+            $(document).on('click', function (e) {
+                if ($(e.target).closest(".form-control").length === 0) {
+                    $(".form-control").children(".listItemDiv").hide();
+                    $scope.activeList = false;
+                }
+            });
+
+
+        })
+    </script>
+</body>
+
+</html>

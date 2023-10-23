@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.css"
+        integrity="sha512-W9OWS8dgpQBw5Hb+tbMto1BMsHvYOXT/AFBGvASCPUJleaEdpOAN5lzgj9RrTbo3YrlR+m9xdOBccp8F+SFyQg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400;500&display=swap");
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Hind Vadodara", sans-serif;
+    }
+
+    html body {
+        scroll-behavior: smooth;
+    }
+
+    header {
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+        height: 80px;
+        top: 0;
+        left: 0;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid #333;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        width: 70px;
+    }
+
+    .mainLogo img {
+        width: 70px;
+    }
+
+    #pagepiling .section {
+        background-size: cover;
+        text-align: center;
+    }
+
+    #pagepiling .section.section-one {
+        background-image: url('https://images.pexels.com/photos/3011837/pexels-photo-3011837.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    }
+
+    #pagepiling .section.section-two {
+        background-image: url('https://images.pexels.com/photos/165553/pexels-photo-165553.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    }
+
+    #pagepiling .section.section-three {
+        background-image: url('https://images.pexels.com/photos/1632045/pexels-photo-1632045.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    }
+
+    #pagepiling .section.section-four {
+        background-image: url('https://images.pexels.com/photos/2064827/pexels-photo-2064827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    }
+
+    #pagepiling .section h2 {
+        color: #ffffff;
+        font-size: 10rem;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    #pp-nav li .active span,
+    .pp-slidesNav .active span {
+        background-color: #ffffff;
+    }
+
+    h1 {
+        font-size: 56px;
+        line-height: 60px;
+        margin: 0;
+        padding: 0;
+        color: #000;
+    }
+
+    p {
+        font-size: 17px;
+        line-height: 23px;
+        margin: 0;
+        padding: 0;
+        color: #000;
+    }
+
+    .container {
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pp-tableCell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #pp-nav {
+        position: fixed;
+        margin-top: 0px;
+        top: 56%;
+        opacity: 1;
+    }
+
+    @media (max-width: 767px) {
+        h1 {
+            font-size: 40px;
+            line-height: 46px;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 20px;
+        }
+
+        #pp-nav {
+            display: none;
+        }
+
+        .container {
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        @media only screen and (orientation: landscape) {
+
+            div#pagepiling {
+                margin-top: 50px;
+            }
+
+            .container {
+                gap: 20px;
+                padding: 0 20px;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 30px;
+                line-height: 36px;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+
+    }
+</style>
+
+<body>
+    <header>
+        <nav>
+            <div class="brand">
+                <div class="mainLogo">
+                    <img src="./assets/img/ba.svg">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="pagepiling">
+        <div class="section section-one">
+            <div class="container">
+                <h1>A Nationwide Dental Technology Company</h1>
+                <p>We create cutting edge solutions for dentists to better manage, analyze and grow their practice.
+                    As
+                    the leading dental technology provider we pride our selves in delivering the most valuable
+                    solutions
+                    to dentists nationwide and strive to deliver world-class support.</p>
+                <div class="logo"><img src="./assets/img/ba-white.svg"></div>
+            </div>
+        </div>
+
+        <div class="section section-two">
+            <div class="container">
+                <h1>Manage, Analyze and Grow</h1>
+                <p>the leading dental technology provider we pride our selves in delivering the most valuable solutions
+                    to dentists nationwide and strive to deliver world-class support</p>
+                <div class="logo"><img src="./assets/img/axle.svg"></div>
+            </div>
+        </div>
+
+        <div class="section section-three">
+            <div class="container">
+                <h1 class="">Managed Remote IT Solutions</h1>
+                <p>the leading dental technology provider we pride our selves in delivering the most valuable solutions
+                    to dentists nationwide and strive to deliver world-class support</p>
+                <div class="logo"><img src="./assets/img/zenith.svg"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.js"
+        integrity="sha512-FcXc9c211aHVJEHxoj2fNFeT8+wUESf/4mUDIR7c31ccLF3Y6m+n+Wsoq4dp2sCnEEDVmjhuXX6TfYNJO6AG6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#pagepiling').pagepiling({
+                navigation: {
+                    'textColor': '#ffffff',
+                    'bulletsColor': '#ffffff',
+                    'position': 'left',
+                    'tooltips': ['BA', 'Axle', 'Zenith']
+                }
+            });
+
+        });
+        function sum(...c) {
+            var add = 0;
+            for (var i of c) {
+                add += i
+            }
+            return add;
+        }
+        console.log(sum(5, 3, 1, 2, 3, 4, 5, 6))
+        var data = [
+            { name: 'mahesh', salary: 10000 },
+            { name: 'akash', salary: 20000 },
+            { name: 'nitin', salary: 30000 },
+            { name: 'raju', salary: 40000 },
+            { name: 'sawraj', salary: 50000 }
+        ]
+        function totalSalary(arr) {
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                var total = sum += arr[i].salary;
+                avg = total/arr.length
+            }
+            return avg;
+        }
+        console.log(totalSalary(data))
+    </script>
+</body>
+
+</html>

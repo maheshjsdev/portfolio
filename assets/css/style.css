@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans:wght@300;400&display=swap");
+
+main {
+  position: relative;
+  z-index: 99;
+}
+/* Profile section */
+section.commonSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 0 70px 0;
+}
+
+.container {
+  width: 1440px;
+  padding: 0 40px;
+}
+.profilePic img {
+  width: 239px;
+  height: 239px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+.profileFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 65px 0 0 0;
+}
+
+.profileFlexItem {
+  width: 33%;
+  padding: 20px 20px 20px 0;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.profileHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+}
+p.profileCenterTxt {
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+}
+.subHeading {
+  font-size: 24px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  transition: all 0.3s ease-in-out;
+  color: var(--textColor);
+
+}
+.para {
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 30px;
+  transition: all 0.3s ease-in-out;
+  color: var(--textColor);
+}
+.detailsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+h3.commonMiniHead {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 2px;
+}
+h1.commonHeading {
+  font-size: 48px;
+  font-weight: 400;
+  font-family: "Josefin Sans", sans-serif;
+  text-align: center;
+}
+.profilePic {
+  text-align: center;
+}
+/* skills section  */
+.skillItem {
+  padding: 35px 20px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 370px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--parimeryColor);
+}
+.skillItem:hover{
+  background-color: var(--hoverColor);
+}
+
+.skillItem:hover h2.subHeading{
+  transform: translateY(-5px);
+}
+.skillItem:hover .para{
+  transform: translateY(5px);
+}
+button.owl-prev {
+  position: absolute;
+  left: 51%;
+  bottom: 0;
+  transform: translateX(-51px);
+}
+
+button.owl-next {
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+  transform: translateX(50px);
+}
+
+button span {
+  font-size: 48px;
+  transition: all 200ms linear;
+  color: var(--textColor);
+}
+button span:hover {
+  color: grey;
+}
+.skill .subHeading {
+  text-transform: uppercase;
+}
+
+/* Project section */
+table {
+  width: 100%;
+  text-align: center;
+  padding: 0px 0;
+  border-radius: 12px;
+  border-collapse: collapse;
+  margin-top: 50px;
+  background-color: var(--parimeryColor);
+}
+thead tr{ 
+  border-top: none;
+}
+
+tr {
+  border-top: 1px solid var(--borderColor);
+}
+
+th{
+  padding: 20px 0;
+}
+td {
+  padding: 10px;
+}
+tbody tr:hover {
+  background-color: var(--hoverColor);
+  cursor: pointer;
+}
+
+

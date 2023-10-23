@@ -1,0 +1,212 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  overflow-x: hidden;
+  background: #f5f5f5;
+}
+.container {
+  display: flex;
+  width: 100vw;
+  gap: 0;
+}
+.leftDiv {
+  width: 40%;
+  position: relative;
+  background-image: url(../img/banner.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  padding: 50px 0 0 184px;
+}
+.leftDivInner {
+  display: flex;
+  flex-direction: column;
+  gap: 182px;
+}
+h1.heading {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 56px;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+.commonFormBtn {
+  padding: 20px 0;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.396429px;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: #132eb1;
+  border: none;
+  margin-top: 41px;
+  cursor: pointer;
+}
+/* right side div */
+.rightDiv {
+  width: calc(100% - 40%);
+  height: 100vh;
+  padding: 50px 100px 100px 100px;
+}
+.formStepheadBlock {
+  display: flex;
+  gap: 15px;
+}
+.opcity {
+  opacity: 0.3;
+}
+
+form.commonForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.headingFlex {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+h3.formStepHead {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.428571px;
+  text-transform: uppercase;
+  color: #0c1331;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  color: #0c1331;
+}
+.progressBar {
+  display: flex;
+  gap: 15px;
+  padding: 42px 0px 42px 0;
+}
+.progressBar span.bar {
+  display: inline-block;
+  width: 100%;
+  height: 3px;
+  background: #0965ff;
+}
+input {
+  width: 100%;
+  padding: 16px 0px;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  outline: none;
+}
+input::placeholder {
+  color: #0c1331;
+  opacity: 0.5;
+}
+/* .error{
+    display: none;
+} */
+.error .borderRed {
+  width: 100%;
+  height: 1.5px;
+  background-color: red;
+  display: inline-block;
+  position: relative;
+  top: -34px;
+}
+.practiceAddBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.practiceAddBlock::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #0966ff;
+  top: 55px;
+}
+.practiceBtnFlex {
+  display: flex;
+  gap: 20px;
+}
+.counterDivFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+span.placeholder {
+  font-size: 14px;
+  color: #0c1331;
+  opacity: 0.5;
+}
+button.practiceBtn {
+  font-size: 25px;
+  width: 43px;
+  height: 43px;
+  color: #0966ff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+/* Back to home page */
+.home.ng-scope {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.backToHomePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 10px 20px 10px;
+  width: 100%;
+  max-width: 500px;
+}
+.backToHomePage .brand {
+  margin-bottom: 73px;
+}
+
+.backToHomePage .circleImg {
+  margin-bottom: 30px;
+}
+
+h2.heading2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.428571px;
+  text-transform: uppercase;
+  color: #0c1331;
+}
+p.marginTop {
+  margin-top: 30px;
+}
+.backToHomePage button.commonFormBtn {
+  width: 277px;
+}

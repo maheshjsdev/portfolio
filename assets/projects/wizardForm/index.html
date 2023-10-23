@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <div id="container" ng-controller="myCtrl">
+        <div id="progressBar">
+            <span id="icon0" class="icon">1</span>
+            <span id="bar1" class="bar"></span>
+            <span id="icon1" class="icon">2</span>
+            <span id="bar2" class="bar"></span>
+            <span id="icon2" class="icon">3</span>
+        </div>
+        <form name="loginInfoForm" novalidate ng-show="step=='step1'" ng-submit="submit()">
+            <div id="loginInfo" class="formBox">
+                <h2 class="commonHead">Account Details</h2>
+                <input type="text" placeholder="User name" id="userName" ng-model="userName" name="userName" required />
+                <span class="error"
+                    ng-show="(loginInfoForm.userName.$touched ||  loginInfoForm.$submitted) && loginInfoForm.userName.$invalid ">This
+                    field is
+                    required</span>
+                <input type="password" id="pwd" placeholder="Password" ng-model="pwd" name="pwd" required />
+                <span class="error"
+                    ng-show="(loginInfoForm.pwd.$pristine && loginInfoForm.pwd.$touched) ||(loginInfoForm.pwd.$invalid  && loginInfoForm.$submitted) ">This
+                    field is
+                    required</span>
+                <button id="nextBtn" type="submit" class="next" data-num="1" ng-click="loginInfoClicked()">Next</button>
+            </div>
+        </form>
+        <form name="personalInfoForm" novalidate ng-show="step=='step2'">
+            <div id="personalInfo" class="formBox">
+                <h2 class="commonHead">Personal Details</h2>
+                <input type="text" placeholder="First Name" id="fname" ng-model="fname" name="fname" required />
+                <span class="error"
+                    ng-show="(personalInfoForm.fname.$touched ||  personalInfoForm.$submitted) && personalInfoForm.fname.$invalid ">This
+                    field is
+                    required</span>
+                <input type="text" id="lname" placeholder="Last name" ng-model="lname" name="lname" />
+                <button id="prevBtn" class="previous" data-num="1" ng-click="prevLoginInfoClicked()">Previous</button>
+                <button id="nextBtn1" class="next" data-num="2" ng-click="personalInfoClicked()">Next</button>
+
+            </div>
+        </form>
+        <form name="contactInfoForm" ng-show="step=='step3'" novalidate>
+            <div id="contactInfo" class="formBox">
+                <h2 class="commonHead">Contact Details</h2>
+                <input type="email" placeholder="Email" id="email" ng-model="email" name="email" required />
+                <span class="error"
+                    ng-show="(contactInfoForm.email.$touched ||  contactInfoForm.$submitted) && contactInfoForm.email.$invalid ">This
+                    field is
+                    required</span>
+                <input type="tel" id="phone" placeholder="Mobile" pattern="[0-9]{10}" ng-model="phone" name="phone" />
+                <button id="prevBtn1" class="previous" data-num="2"
+                    ng-click="prevPersonalInfoClicked()">Previous</button>
+                <button type="submit" value="Submit" id="submitBtn" ng-click="formSubmitClicked()">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script> 
+        $(function () {
+            window.step = 1;
+            $(".next11").click(function (e) {
+                e.preventDefault();
+                var inpVal = $("#userName").val();
+                var pass = $("input#pwd").val();
+                var fname = $("#fname").val().trim();
+                var lname = $("#lname").val().trim();
+
+                if (!inpVal || !inpVal.trim() || !pass || (window.step != 1 && (!fname || !lname))) {
+                    // if (inpVal == "" || inpVal == null || inpVal == undefined) {
+                    alert("Please enter field required");
+                    console.log(inpVal)
+                    return false;
+                } else {
+                    window.step = 2;
+                    $(".formBox").css("display", "none");
+                    var nextDiv = $(this).parent().next().attr("id");
+                    $("#" + nextDiv).fadeIn();
+                    var num = $(this).data("num");
+                    $("#bar" + num + ", #icon" + num).addClass("active");
+                    return false;
+                }
+
+            });
+
+            // $(".next").click(function (e) {
+            //     e.preventDefault();
+            //     $(".formBox").css("display", "none");
+            //     var nextDiv = $(this).parent().next().attr("id");
+            //     $("#" + nextDiv).fadeIn();
+            //     var num = $(this).data("num");
+            //     $("#bar" + num + ", #icon" + num).addClass("active");
+            // });
+            $(".previous11").click(function (e) {
+                e.preventDefault();
+                window.step = 1;
+                $(".formBox").css("display", "none");
+                var preDiv = $(this).parent().prev().attr("id");
+                $("#" + preDiv).fadeIn();
+                var preNum = $(this).data("num");
+                $("#bar" + preNum + ", #icon" + preNum).removeClass("active");
+            })
+        })
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.step = 'step1';
+            $scope.loginInfoClicked = function () {
+                if (!$scope.loginInfoForm.$valid) {
+                    return;
+                }
+                $scope.step = 'step2';
+                $("#bar1, #icon1").addClass("active");
+
+            }
+            $scope.personalInfoClicked = function () {
+                if (!$scope.personalInfoForm.$valid) {
+                    return;
+                }
+                $scope.step = 'step3';
+                $("#bar2 ,#icon2").addClass("active");
+
+            }
+            $scope.formSubmitClicked = function () {
+                if (!$scope.contactInfoForm.$valid) {
+                    alert("reqiured");
+                    return;
+                } else {
+                    alert("Successfully submit");
+                    $scope.step = 'step1';
+                    $("#icon1, #icon2, #bar1, #bar2").removeClass("active");
+                    $scope.reset();
+
+                }
+            }
+
+            $scope.prevLoginInfoClicked = function () {
+                $scope.step = 'step1';
+                $("#icon1, #icon2, #bar1, #bar2").removeClass("active");
+
+            }
+            $scope.prevPersonalInfoClicked = function () {
+                $scope.step = 'step2';
+                $("#bar2 ,#icon2").removeClass("active");
+
+            }
+            $scope.reset = function () {
+                //  login form
+                $scope.loginInfoForm && $scope.loginInfoForm.$setPristine();
+                $scope.loginInfoForm && $scope.loginInfoForm.$setUntouched();
+                $scope.userName = '';
+                $scope.pwd = '';
+
+                // personal details
+                $scope.personalInfoForm && $scope.personalInfoForm.$setPristine();
+                $scope.personalInfoForm && $scope.personalInfoForm.$setUntouched();
+                $scope.fname = '';
+                $scope.lname = '';
+
+                // Contact details
+                $scope.contactInfoForm && $scope.contactInfoForm.$setPristine();
+                $scope.contactInfoForm && $scope.contactInfoForm.$setUntouched();
+                $scope.email = '';
+                $scope.phone = '';
+            }
+
+        });
+    </script>
+
+
+</body>
+
+</html>

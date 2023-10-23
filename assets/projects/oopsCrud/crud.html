@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud | Class</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-color: #4cd137;
+        color: #fff;
+
+    }
+
+    th,
+    form,
+    h5,
+    .form-label {
+        color: #30336b;
+    }
+
+    td {
+        text-transform: capitalize;
+        color: #6D214F;
+
+    }
+
+    td:nth-child(3) {
+        letter-spacing: 1px;
+    }
+
+    .modal {
+        display: block;
+    }
+
+    .modal-footer {
+        position: relative;
+        height: 55px;
+        padding-bottom: 0;
+    }
+
+    .errorMsg {
+        color: red;
+        font: 13px;
+        position: absolute;
+        left: 15px;
+    }
+
+    .formBtn {
+        position: absolute;
+        right: 15px;
+    }
+
+    .modal-header:nth-child(2) {
+        border-bottom: none;
+    }
+
+    .form-nav {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    button {
+        border: none;
+        font-size: 15px;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+    }
+
+    .activetab {
+        border-bottom: 3px solid #2d2d2d;
+    }
+</style>
+
+<body ng-app="bankApp" ng-controller="bankControl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Javascript Bank</h1>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success" ng-click="openFormClicked()">Create New Accout</button>
+                <button type="button" class="btn btn-primary" ng-click="openDepositAmountForm()">Deposit Amount</button>
+                <button type="button" class="btn btn-secondary" ng-click="openWithdrawAmountForm()">Withdraw
+                    Amount</button>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in allRecords">
+                    <td>{{$index+1}}</td>
+                    <td>{{data.name}}</td>
+                    <td>{{data.accountNumber}}</td>
+                    <td>{{data.balance | currency:'&#8377;'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--form account creating form Modal -->
+    <div class="modal" ng-show="formBox === 1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Account Form</h5>
+                    <button type="button" class="btn-close" ng-click="closeFormClicked()"></button>
+                </div>
+                <div class="modal-header">
+                    <div class="form-nav" ng-init="tabselector = 'firsttab'">
+                        <button ng-click="tabselector = 'firsttab'"
+                            ng-class="{'activetab' : tabselector == 'firsttab'}">Saving Account</button>
+                        <button ng-click="tabselector = 'secondtab'"
+                            ng-class="{'activetab' : tabselector == 'secondtab'}">Current Account</button>
+                    </div>
+                </div>
+                <!-- saving account form -->
+                <div class="modal-body" ng-if="tabselector == 'firsttab'">
+                    <form name="savingAccountForm" novalidate>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="name" name="name" ng-model="user.name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="balance" class="form-label">Initial Balance</label>
+                            <input type="number" class="form-control" id="balance" name="balance"
+                                ng-model="user.balance" required>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="errorMsg" ng-show="((savingAccountForm.name.$touched || savingAccountForm.$submitted) && savingAccountForm.name.$invalid) || 
+                             ((savingAccountForm.balance.$touched || 
+                                 savingAccountForm.$submitted) && savingAccountForm.balance.$invalid)">
+                                Not found</div>
+                            <div class="formBtn">
+
+                                <button type="button" class="btn btn-secondary"
+                                    ng-click="closeFormClicked()">Close</button>
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="savingAccountForm.$valid && createSavingAccount()">Create</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- current account form -->
+                <div class="modal-body" ng-if="tabselector == 'secondtab'">
+                    <form name="currentAccountForm" novalidate>
+                        <div class="mb-3">
+                            <label for="name1" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="name1" name="aname" ng-model="usercurrent.name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="balance1" class="form-label">Initial Balance</label>
+                            <input type="number" class="form-control" id="balance1" name="abalance"
+                                ng-model="usercurrent.balance">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="errorMsg" ng-show="((currentAccountForm.aname.$touched || currentAccountForm.$submitted) && currentAccountForm.aname.$invalid) || 
+                             ((currentAccountForm.abalance.$touched || 
+                             currentAccountForm.$submitted) && currentAccountForm.abalance.$invalid)">
+                                Not found</div>
+                            <div class="formBtn">
+
+                                <button type="button" class="btn btn-secondary"
+                                    ng-click="closeFormClicked()">Close</button>
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="currentAccountForm.$valid && createCurrentAccount()">Create</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- transaction form modal -->
+    <div class="modal" ng-show="transactionBox === 1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{headingTxt}}</h5>
+                    <button type="button" class="btn-close" ng-click="closeFormClicked()"></button>
+                </div>
+                <!-- Deposit and withdraw -->
+                <div class="modal-body">
+                    <form name="transactionForm" novalidate>
+                        <div class="my-3">
+                            <label for="accountNumber" class="form-label">Account Number</label>
+                            <input type="text" class="form-control" id="accountNumber" name="accountNumber"
+                                ng-model="user.accountNumber" required autocomplete="off">
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount1" class="form-label">Amount</label>
+                            <input type="number" class="form-control" id="amount1" name="amount" ng-model="user.amount"
+                                required>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="errorMsg"
+                                ng-show="((transactionForm.accountNumber.$touched || transactionForm.$submitted) && transactionForm.accountNumber.$invalid) || 
+                                 ((transactionForm.amount.$touched || transactionForm.$submitted) && transactionForm.amount.$invalid)">
+                                Not found</div>
+                            <div class="formBtn">
+                                <button type="button" class="btn btn-secondary"
+                                    ng-click="closeFormClicked()">Close</button>
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="transactionForm.$valid && depositAmountClicked()"
+                                    ng-show="depositBtn === 1">Deposit</button>
+
+                                <button type="submit" class="btn btn-primary"
+                                    ng-click="transactionForm.$valid && withdrawAmountClicked()"
+                                    ng-show="withdrawBtn === 1">Withdraw</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var app = angular.module('bankApp', []);
+        app.controller('bankControl', function ($scope) {
+            var defaultRecords = [
+                { id: 1, name: 'mahesh', accountNumber: 1689148983457, balance: 1500 },
+                { id: 2, name: 'john doe', accountNumber: 1689148983986, balance: 2500 }
+            ];
+            // Data transfer
+            $scope.dataTransfer = function () {
+                if (!JSON.parse(sessionStorage.getItem('crud'))) {
+                    window.sessionStorage.setItem('crud', JSON.stringify(defaultRecords))
+                }
+                else {
+                    $scope.allRecords = JSON.parse(window.sessionStorage.getItem('crud'))
+                }
+            }
+            // window load data 
+            window.onload = $scope.dataTransfer();
+            // main Bank Class
+            class BankAccount {
+                id;
+                name;
+                balance;
+                accountNumber;
+
+                constructor(id, name, balance = 0) {
+                    this.id = id;
+                    this.name = name;
+                    this.balance = balance;
+                    this.accountNumber = Date.now();
+                }
+            }
+            // Deposit Amount
+            BankAccount.prototype.deposit = function (amount) {
+                this.balance += amount;
+            }
+
+            // Withdraw Amount
+            BankAccount.prototype.withdraw = function (amount) {
+                this.balance -= amount;
+            }
+            // Saving Account
+            class savingAccount extends BankAccount {
+                transactionLimit = 10000;
+
+                constructor(id, name, balance = 0) {
+                    super(id, name, balance);
+                }
+            }
+
+            // Current Account
+            class currentAccount extends BankAccount {
+                transactionLimit = 50000;
+
+                constructor(id, name, balance = 0) {
+                    super(id, name, balance);
+                }
+            }
+
+            //create saving account function
+            $scope.user = { id: 0, name: '', balance: '' }
+            $scope.createSavingAccount = function () {
+                var tempRecords = JSON.parse(window.sessionStorage.getItem('crud'));
+                newAccountUser = {
+                    id: (tempRecords.length) + 1,
+                    name: ($scope.user.name),
+                    balance: ($scope.user.balance)
+                }
+                var newUser = new savingAccount(newAccountUser.id, newAccountUser.name, newAccountUser.balance);
+                tempRecords.push(newUser)
+                window.sessionStorage.setItem('crud', JSON.stringify(tempRecords))
+                $scope.dataTransfer()
+                $scope.user = { id: 0, name: '', balance: '' }
+                $scope.closeFormClicked()
+            }
+
+            // create current account function
+            $scope.usercurrent = { id: 0, name: '', balance: '' }
+            $scope.createCurrentAccount = function () {
+                var tempRecords = JSON.parse(window.sessionStorage.getItem('crud'))
+                newAccountUser = {
+                    id: (tempRecords.length) + 1,
+                    name: ($scope.usercurrent.name),
+                    balance: ($scope.usercurrent.balance)
+                }
+                var newUser = new currentAccount(newAccountUser.id, newAccountUser.name, newAccountUser.balance);
+                tempRecords.push(newUser)
+                window.sessionStorage.setItem('crud', JSON.stringify(tempRecords))
+                $scope.dataTransfer()
+                $scope.usercurrent = { id: 0, name: '', balance: '' }
+                $scope.closeFormClicked()
+            }
+            // account crate form modal open 
+            $scope.openFormClicked = function () {
+                $scope.formBox = 1;
+            }
+            // account crate form modal close
+            $scope.closeFormClicked = function () {
+                $scope.formBox = 0;
+                $scope.transactionBox = 0;
+            }
+            // Deposit Amount function clicked
+            $scope.depositAmountClicked = function () {
+                var tempRecords = JSON.parse(window.sessionStorage.getItem('crud'));
+                var accNum = $scope.user.accountNumber;
+                var amountVal = $scope.user.amount;
+                var findAccountNum = tempRecords.find(x => x.accountNumber === +accNum);
+                if (findAccountNum.transactionLimit === 10000) {
+                    var updateRecords = new savingAccount(findAccountNum.id, findAccountNum.name, findAccountNum.balance)
+                } else {
+                    var updateRecords = new currentAccount(findAccountNum.id, findAccountNum.name, findAccountNum.balance)
+                }
+                updateRecords.deposit(+amountVal);
+                var findIndex = tempRecords.findIndex(x => x.id === updateRecords.id);
+                tempRecords[findIndex] = updateRecords;
+                window.sessionStorage.setItem('crud', JSON.stringify(tempRecords))
+                $scope.dataTransfer()
+                $scope.user = {}
+                $scope.closeFormClicked()
+            }
+            // Withdraw Amount function clicked
+            $scope.withdrawAmountClicked = function () {
+                var tempRecords = JSON.parse(window.sessionStorage.getItem('crud'));
+                var accNum = $scope.user.accountNumber;
+                var amountVal = $scope.user.amount;
+                var findAccountNum = tempRecords.find(x => x.accountNumber === +accNum);
+                if (findAccountNum.transactionLimit === 10000) {
+                    var updateRecords = new savingAccount(findAccountNum.id, findAccountNum.name, findAccountNum.balance)
+                } else {
+                    var updateRecords = new currentAccount(findAccountNum.id, findAccountNum.name, findAccountNum.balance)
+                }
+                updateRecords.withdraw(+amountVal);
+                var findIndex = tempRecords.findIndex(x => x.id === updateRecords.id);
+                tempRecords[findIndex] = updateRecords;
+                window.sessionStorage.setItem('crud', JSON.stringify(tempRecords))
+                $scope.dataTransfer()
+                $scope.user = {}
+                $scope.closeFormClicked()
+            }
+
+
+
+            // Deposit form open
+            $scope.openDepositAmountForm = function () {
+                $scope.headingTxt = 'Deposit Form';
+                $scope.transactionBox = 1;
+                $scope.depositBtn = 1;
+                $scope.withdrawBtn = 0;
+
+
+            }
+            // Withraw form opne
+            $scope.openWithdrawAmountForm = function () {
+                $scope.headingTxt = 'Withdraw Form';
+                $scope.transactionBox = 1;
+                $scope.withdrawBtn = 1;
+                $scope.depositBtn = 0;
+            }
+
+            $scope.init = function(){
+                $scope.dataTransfer();
+            }
+            $scope.init();
+
+        })
+    </script>
+
+</body>
+
+</html>

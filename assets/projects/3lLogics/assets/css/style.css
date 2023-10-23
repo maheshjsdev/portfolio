@@ -1,0 +1,319 @@
+/* ======================
+     preloader
+========================== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: #fff;
+}
+#preloader #status {
+  background: url(../image/preloader.gif);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  transform: translateX(-50px) translateY(-50px);
+}
+/* ======================
+     home section
+========================== */
+#home img {
+  width: 100%;
+  height: 100vh;
+}
+#home {
+  margin-top: 100px;
+  position: relative;
+  z-index: 99;
+}
+#home-content {
+  position: absolute;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  top: 30%;
+  left: 10%;
+  display: inline-block;
+  margin: 0;
+}
+#home-text h5 {
+  color: cadetblue;
+  margin: 0;
+  font-size: 20px;
+}
+#home-text h1 {
+  font-size: 42px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin: 0;
+  color: #fff;
+  margin-top: 10px;
+}
+#home-btn button {
+  width: 150px;
+  height: 40px;
+  color: #fff;
+  background: #000;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  margin-top: 50px;
+  cursor: pointer;
+  outline: none;
+  transition: all 300ms ease-in-out;
+  display: inline-block;
+}
+#home-btn button:hover,
+#home-btn button:focus {
+  background: #fff;
+  color: #000;
+}
+
+/* ======================
+     owl carousel btn
+========================== */
+button.owl-next {
+  position: absolute;
+  right: 20px;
+  top: 35%;
+  outline: none !important;
+  cursor: pointer;
+}
+button.owl-prev {
+  position: absolute;
+  left: 20px;
+  top: 35%;
+  outline: none !important;
+}
+button.owl-prev span {
+  font-size: 50px;
+}
+button.owl-next span {
+  font-size: 50px;
+}
+/* ======================
+     about section
+========================== */
+#about img {
+  width: 100%;
+  min-height: 350px;
+  margin: 0;
+  height: 100%;
+}
+#about .content-box-lg {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.about-box {
+  width: 33%;
+  position: relative;
+}
+.about-text {
+  position: absolute;
+  top: 80%;
+  left: 10%;
+  margin: 0;
+  display: inline-block;
+  color: #fff4f4;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+}
+@media (max-width: 1024px) {
+  #about img {
+    max-width: 350px;
+    height: 250px;
+  }
+  #about .content-box-lg {
+    padding: 0px 28px 0px 0;
+  }
+}
+@media (max-width: 768px) {
+  #about .content-box-lg {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .about-box {
+    width: 100%;
+  }
+  #about img {
+    max-width: initial;
+    height: 330px;
+    width: 100%;
+  }
+  #about .content-box-lg {
+    padding: 0px 32px 0px 10px;
+  }
+}
+
+/* ======================
+     product section
+========================== */
+#product img {
+  width: 100%;
+  height: 250px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+section#product {
+  background: whitesmoke;
+  padding-bottom: 50px;
+}
+
+.product-bottom-text h6 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+}
+
+.product-bottom-text p {
+  font-size: 14px;
+  font-weight: 100;
+}
+#product .prodcut-heading {
+  margin-top: 100px;
+}
+.prodcut-heading h1 {
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 50px;
+}
+.prodcut-heading .product-taber {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+.product-taber h4 {
+  font-size: 18px;
+  font-family: "Raleway";
+  line-height: 25px;
+  border-bottom: 2px solid transparent;
+  transition: all 300ms linear;
+  cursor: pointer;
+}
+.product-taber h4:hover,
+.product-taber h4:focus {
+  border-bottom-color: #f4c613;
+  opacity: 0.5;
+}
+#fashion {
+  display: none;
+}
+#sports {
+  display: none;
+}
+.prodcut-footer h3 {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin-top: 50px;
+}
+
+/* ======================
+     famous section
+========================== */
+#famous {
+  width: 100%;
+  height: 100%;
+}
+#famous .content-box-lg {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 100px 0px;
+  justify-content: center;
+  align-items: center;
+}
+#famous img {
+  max-width: 189px;
+  width: 100%;
+  height: 200px;
+}
+/* ======================
+     footer section
+========================== */
+#footer-left .brand {
+  margin-bottom: 20px;
+}
+#footer-left p {
+  font-size: 14px;
+  display: inline-block;
+  color: black;
+}
+#footer-left h2 {
+  font-size: 20px;
+  display: inline-block;
+}
+ul.footer-links {
+  list-style-type: none;
+  font-size: 16px;
+  line-height: 36px;
+}
+#footer h4 {
+  margin-left: 37px;
+  font-size: 28px;
+  display: inline-block;
+}
+section#footer {
+  border-bottom: 1px solid gray;
+}
+#footer-end .content-box-lg {
+  padding: 20px 0 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+ul.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+}
+ul.social-icon li a {
+  display: inline-block;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 20px;
+  transition: all 300ms linear;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+}
+#footer-end-left p {
+    font-size: 14px;
+    margin-top: 10px;
+}
+ul.social-icon li:nth-child(1) a:hover {
+  background-color: #3b5998;
+  color: #fff;
+  transform: translateY(-10px);
+}
+ul.social-icon li:nth-child(2) a:hover {
+    background-color: #1da1f2;
+  color: #fff;
+  transform: translateY(-10px);
+}
+ul.social-icon li:nth-child(3) a:hover {
+    background-color: #f09433;
+  color: #fff;
+  transform: translateY(-10px);
+}
+
+@media (max-width: 786px) {
+  .footer-center {
+    margin-top: 30px;
+  }
+}

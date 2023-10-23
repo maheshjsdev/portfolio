@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Path</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    h1 {
+        text-transform: capitalize;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>placeholder image path generator</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="select" class="form-label">Image size</label>
+                <select class="form-select" id="select">
+                    <option selected value="100x100">Small</option>
+                    <option value="200x200">Medium square</option>
+                    <option value="300x200">Medium</option>
+                    <option value="350x300">Large</option>
+                    <option value="400x600">X-large</option>
+                    <option value="600x650">Full hd</option>
+                </select>
+                <div class="form-group my-3">
+                    <label for="text" class="form-label">Text on image</label>
+                    <input type="text" class="form-control" id="text">
+                </div>
+                <div class="form-group my-3">
+                    <label for="bg" class="form-label">Color of background</label>
+                    <input type="color" value="#98bc62" id="bg">
+                </div>
+                <div class="form-group my-3">
+                    <label for="textColor" class="form-label">Color of taxt</label>
+                    <input type="color" value="#2C5F2D" id="textColor">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="my-3">
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" aria-label="With textarea" title="url copy"></textarea>
+                    </div>
+                    <img src="" alt="Placeholder image">
+                </div>
+
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./main.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans:wght@300;400&display=swap");
 
 main {
   position: relative;
@@ -10,6 +9,8 @@ section.commonSection {
   justify-content: center;
   align-items: center;
   padding: 120px 0 70px 0;
+  overflow: hidden;
+  width: 100%;
 }
 
 .container {
@@ -53,7 +54,6 @@ p.profileCenterTxt {
   font-weight: 400;
   transition: all 0.3s ease-in-out;
   color: var(--textColor);
-
 }
 .para {
   font-size: 16px;
@@ -96,14 +96,14 @@ h1.commonHeading {
   transition: all 0.3s ease-in-out;
   background-color: var(--parimeryColor);
 }
-.skillItem:hover{
+.skillItem:hover {
   background-color: var(--hoverColor);
 }
 
-.skillItem:hover h2.subHeading{
+.skillItem:hover h2.subHeading {
   transform: translateY(-5px);
 }
-.skillItem:hover .para{
+.skillItem:hover .para {
   transform: translateY(5px);
 }
 button.owl-prev {
@@ -142,7 +142,7 @@ table {
   margin-top: 50px;
   background-color: var(--parimeryColor);
 }
-thead tr{ 
+thead tr {
   border-top: none;
 }
 
@@ -150,7 +150,7 @@ tr {
   border-top: 1px solid var(--borderColor);
 }
 
-th{
+th {
   padding: 20px 0;
 }
 td {
@@ -160,5 +160,3 @@ tbody tr:hover {
   background-color: var(--hoverColor);
   cursor: pointer;
 }
-
-

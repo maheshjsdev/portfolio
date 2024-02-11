@@ -1,28 +1,15 @@
 // skill testimonilas
 $(document).ready(function () {
   $(".owl-carousel").owlCarousel({
-    items: 3,
     loop: true,
     nav: true,
     dots: true,
     smartSpeed: 1000,
     margin: 25,
-    responsiveClass: true,
-    responsive: {
-      424: {
-        items: 1,
-        nav: false
-      },
-      785: {
-        items: 2,
-        nav: true
-      },
-      1000: {
-        items: 3,
-        nav: true,
-        loop: true
-      }
-    }
+    itemsDesktop: [1340, 3],
+    itemsDesktopSmall: [1024, 2],
+    itemsTablet: [768, 1],
+    itemsMobile: [650, 1],
 
   });
 });
@@ -35,10 +22,13 @@ let tableData = [
   { id: 4, proName: "3lLogics", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "/assets/projects/3lLogics/index.html" },
   { id: 5, proName: "Zenith", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "/assets/projects/zenith/index.html" },
   { id: 6, proName: "Zenith Form", build: 'HTML, CSS, Bootstrap, AngularJS', path: "/assets/projects/zenithform/index.html" },
-  { id: 7, proName: "Currency Converter", build: 'HTML, CSS, Bootstrap, JS', path: 
-    "/assets/projects/currencyConverter/index.html" },
+  {
+    id: 7, proName: "Currency Converter", build: 'HTML, CSS, Bootstrap, JS', path:
+      "/assets/projects/currencyConverter/index.html"
+  },
   { id: 8, proName: "Dropdown Select", build: 'HTML, CSS, AngularJS', path: "/assets/projects/dropdownSelect/index.html" },
-  { id: 9, proName: "Filter Table Data", build: 'HTML, CSS, Bootstrap, JS', path: "/assets/projects/filterTableData/index.html" 
+  {
+    id: 9, proName: "Filter Table Data", build: 'HTML, CSS, Bootstrap, JS', path: "/assets/projects/filterTableData/index.html"
   },
   { id: 10, proName: "Full Page Scroll", build: 'HTML, CSS, Jquery', path: "/assets/projects/fullPageScroll/index.html" },
   { id: 11, proName: "Calculator", build: 'HTML, CSS, JS', path: "/assets/projects/calculator/index.html" },
@@ -53,7 +43,7 @@ let tableData = [
 let darkTheme = [
   { id: "1", colorVar: "--bgColor", colorCode: "hsl(230, 30%, 8%)" },
   { id: "2", colorVar: "--parimeryColor", colorCode: "hsl(230, 28%, 12%)" },
-  { id: "3", colorVar: "--textColor", colorCode: "#fff" },
+  { id: "3", colorVar: "--textColor", colorCode: "#F5EBE0" },
   { id: "4", colorVar: "--menuColor", colorCode: "#fff" },
   { id: "5", colorVar: "--headerColor", colorCode: "#27374D" },
   { id: "6", colorVar: "--hoverColor", colorCode: "#04364A" },
@@ -91,16 +81,22 @@ function openProjectClicked(tr) {
 var checkbox = document.getElementById("theme");
 function themeToggleFun() {
   const isChecked = localStorage.getItem("checkboxState");
+  let logo = document.querySelector("img.logo");
+  console.log(logo)
   let root = document.querySelector(":root");
+  let whiteLogoPath = "assets/img/mdlogoWhite.svg";
+  let defaultLogoPath = "/assets/img/mdlogo.svg"
   if (isChecked == "true") {
     checkbox.checked = true;
     darkTheme.forEach(ele => {
       root.style.setProperty(ele.colorVar, ele.colorCode);
+      logo.src = whiteLogoPath;
     })
   } else {
     checkbox.checked = false;
     darkTheme.forEach(ele => {
       root.style.removeProperty(ele.colorVar, ele.colorCode);
+      logo.src = defaultLogoPath;
     })
   }
 }

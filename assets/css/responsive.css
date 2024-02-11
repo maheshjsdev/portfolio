@@ -1,0 +1,35 @@
+@media (max-width: 1023px) {
+  .profileFlex {
+    text-align: center;
+  }
+}
+@media (max-width: 767px) {
+  .profileFlex {
+    flex-wrap: wrap;
+  }
+  .profileFlexItem {
+    width: 100%;
+    height: auto;
+    gap: 10px;
+  }
+  h1.commonHeading {
+    font-size: 36px;
+  }
+  .para {
+    font-size: 14px;
+    line-height: 26px;
+  }
+  p.profileCenterTxt {
+    font-size: 16px;
+  }
+  .subHeading {
+    font-size: 22px;
+
+    .skillItem {
+      padding: 20px 20px;
+      max-width: 310px;
+      height: auto;
+      width: 100%;
+    }
+  }
+}

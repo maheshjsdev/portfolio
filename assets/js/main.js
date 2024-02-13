@@ -1,15 +1,11 @@
 // skill testimonilas
 $(document).ready(function () {
-  $(".owl-carousel").owlCarousel({
-    loop: true,
-    nav: true,
+  $('.responsive').slick({
     dots: true,
-    smartSpeed: 1000,
-    margin: 25,
-    itemsDesktop: [1340, 3],
-    itemsDesktopSmall: [1024, 2],
-    itemsTablet: [768, 1],
-    itemsMobile: [650, 1],
+    speed: 300,
+    slidesToShow: 3,
+    mobileFirst: true,
+    nav: true
 
   });
 });
@@ -82,7 +78,6 @@ var checkbox = document.getElementById("theme");
 function themeToggleFun() {
   const isChecked = localStorage.getItem("checkboxState");
   let logo = document.querySelector("img.logo");
-  console.log(logo)
   let root = document.querySelector(":root");
   let whiteLogoPath = "assets/img/mdlogoWhite.svg";
   let defaultLogoPath = "/assets/img/mdlogo.svg"
@@ -107,10 +102,43 @@ checkbox.addEventListener("change", function () {
   themeToggleFun()
 })
 
+// mobile menu 
+const navbar = document.querySelector("nav.navbar")
+let mobileBtn = document.querySelectorAll(".mobileBtn i");
+
+function mobileMenuToggle() {
+  mobileBtn.forEach(ele => {
+    ele.addEventListener("click", () => {
+      if (ele.className == "fa fa-bars menuOpen") {
+        navbar.classList.add("mobileWidth");
+      } else {
+        if (ele.className == "fa fa-times menuClose") {
+          navbar.classList.remove("mobileWidth");
+        }
+      }
+    })
+  });
+}
+//  class remove with window resize event
+window.addEventListener("resize", function () {
+  if (window.innerWidth < 768) {
+    navbar.classList.remove("mobileWidth");
+  }
+});
+
+// class remove after menu clicked
+let menu = document.querySelectorAll(".menuList li");
+menu.forEach((ele) => {
+  ele.addEventListener("click", () => {
+    navbar.classList.remove("mobileWidth");
+  })
+})
 
 function init() {
   displayTableData()
   themeToggleFun()
+  mobileMenuToggle()
+
 }
 init()
 

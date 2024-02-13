@@ -41,9 +41,9 @@
 ::selection {
   background-color: var(--selectColor);
 }
- html {
+html {
   scroll-behavior: smooth;
-} 
+}
 body {
   color: var(--textColor);
   background-color: var(--bgColor);
@@ -149,4 +149,17 @@ input#theme:checked + label.themeLabel .themeBall {
 }
 i.fa.fa-lightbulb-o {
   font-size: 28px;
+}
+
+/* mobile menu styling */
+.mobileBtn i {
+  font-size: 22px;
+  cursor: pointer;
+}
+nav.navbar i.fa.fa-bars.menuOpen {
+  display: none;
+}
+
+nav.navbar i.fa.fa-times.menuClose {
+  display: none;
 }

@@ -83,13 +83,21 @@ h1.commonHeading {
   text-align: center;
 }
 /* skills section  */
+
+.slick-initialized .slick-slide{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px 0;
+}
 .skillItem {
   padding: 35px 20px;
   text-align: center;
   border-radius: 15px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  width: 370px;
-  height: 350px;
+  width: 370px !important;
+  height: 350px !important;
   display: flex;
   flex-direction: column;
   gap: 20px;

@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="./assets/CSS/master.CSS">
     <link rel="stylesheet" href="./assets/CSS/style.CSS">
     <link rel="stylesheet" href="./assets/css/responsive.css">
-    <link rel="stylesheet" href="./assets/CSS/owl.carousel.min.CSS">
-    <link rel="stylesheet" href="./assets/CSS/owl.theme.default.min.CSS">
+    <!-- Slick silder css file -->
+    <link rel="stylesheet" href="./assets/css/slick.css"/>
+    <link rel="stylesheet" href="./assets/css/slick-theme.css"/>
     <!-- Font awesome icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
@@ -26,7 +27,7 @@
                     <li class="menuItem"><a href="#profile">Profile</a></li>
                     <li class="menuItem"><a href="#skill">Skills</a></li>
                     <li class="menuItem"><a href="#projects">Projects</a></li>
-                    <li class="menuItem"><a href="./assets/img/maheshCV.pdf" target="_blank">Resume</a></li>
+                    <li class="menuItem"><a href="https://maheshjsdev.github.io/cv/" target="_blank">Resume</a></li>
                     <li class="menuItem">
                         <div class="themeBtn">
                             <input type="checkbox" id="theme">
@@ -35,10 +36,12 @@
                         </div>
                     </li>
                 </ul>
+                <div class="mobileBtn">
+                    <i class="fa fa-bars menuOpen" aria-hidden="true"></i>
+                    <i class="fa fa-times menuClose" aria-hidden="true"></i>
+                </div>
             </nav>
-            <!-- <div class="mobileBtn">
-                <i class="fa fa-bars" aria-hi   dden="true"></i>
-            </div> -->
+            
         </div>
 
     </header>
@@ -82,7 +85,7 @@
         <section class="skill commonSection" id="skill">
             <div class="container">
                 <h1 class="commonHeading">Skills</h1>
-                <div class="testimonilas owl-carousel">
+                <div class="responsive">
                     <div class="skillItem">
                         <h2 class="subHeading">html</h2>
                         <p class="para">I have learned HTML. I used HTML elements like list tags, form tags,
@@ -158,12 +161,12 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-        </script>
-
+    <!-- library -->
+    <script type="text/javascript" src="./lib/jquery.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery-migrate-1.2.1.min.js"></script>
+    <script src="./lib/slick.min.js"></script>
+    <!-- main js file -->
     <script src="./assets/js/main.js"></script>
-    <script src="./lib/owl.carousel.min.js"></script>
 </body>
 
 </html>

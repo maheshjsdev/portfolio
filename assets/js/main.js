@@ -80,7 +80,7 @@ function themeToggleFun() {
   let logo = document.querySelector("img.logo");
   let root = document.querySelector(":root");
   let whiteLogoPath = "assets/img/mdlogoWhite.svg";
-  let defaultLogoPath = "/assets/img/mdlogo.svg"
+  let defaultLogoPath = "assets/img/mdlogo.svg";
   if (isChecked == "true") {
     checkbox.checked = true;
     darkTheme.forEach(ele => {

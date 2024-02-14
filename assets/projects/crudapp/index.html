@@ -132,7 +132,8 @@
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control" name="fname" placeholder="First Name"
                                     ng-minlength="3" ng-model="user.fname" required>
-                                <div class="valid-feedback" ng-show="(userForm.fname.$touched || userForm.$submitted) && userForm.fname.$invalid || 
+                                <div class="valid-feedback" ng-show="(userForm.fname.$touched || userForm.$submitted) && 
+                                 userForm.fname.$invalid || 
                                      userForm.fname.$minlength">
                                     Please enter minimum 3 char of first name
                                 </div>

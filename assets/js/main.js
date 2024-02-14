@@ -13,7 +13,7 @@ $(document).ready(function () {
 // projectDetails in tableData 
 let tableData = [
   { id: 1, proName: "Solo", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/solo/index.html" },
-  { id: 2, proName: "CrudApp", build: 'HTML, CSS, Bootstrap, AngularJS', path: "./assets/projects/crudApp/index.html" },
+  { id: 2, proName: "CrudApp", build: 'HTML, CSS, Bootstrap, AngularJS', path: "./assets/projects/crudapp/index.html" },
   { id: 3, proName: "Organic", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/organic/index.html", },
   { id: 4, proName: "3lLogics", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/3lLogics/index.html" },
   { id: 5, proName: "Zenith", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/zenith/index.html" },

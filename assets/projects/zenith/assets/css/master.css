@@ -19,23 +19,23 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 div#preloader {
-  position:fixed;
+  position: fixed;
   left: 0;
   top: 0;
-  right: 0;
-  bottom: 0;
   background-color: #fff;
   z-index: 99999;
+  width: 100%;
+  height: 100%;
 }
 div#preloader div#status {
   background-image: url(../img/preloader.gif);
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translateX(-50px) translateY(-50px);
+  transform: translate(-50%, -50%);
+  width: 65px;
+  height: 65px;
 }
 header#headers {
   display: flex;

@@ -1,20 +1,16 @@
-// skill testimonilas
+// Preloader
 $(document).ready(function () {
-  $('.responsive').slick({
-    dots: true,
-    speed: 300,
-    slidesToShow: 3,
-    mobileFirst: true,
-    nav: true
-
-  });
+  $(window).on("load", function () {
+    $("img.loader").fadeOut();
+    $("#preloader").delay(500).fadeOut();
+  })
 });
 
 // projectDetails in tableData 
 let tableData = [
   { id: 1, proName: "Solo", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/solo/index.html" },
   { id: 2, proName: "CrudApp", build: 'HTML, CSS, Bootstrap, AngularJS', path: "./assets/projects/crudapp/index.html" },
-  { id: 3, proName: "Organic", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/organic/index.html"},
+  { id: 3, proName: "Organic", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/organic/index.html" },
   { id: 4, proName: "3lLogics", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/3lLogics/index.html" },
   { id: 5, proName: "Zenith", build: 'HTML, CSS, Bootstrap, JS, Jquery', path: "./assets/projects/zenith/index.html" },
   { id: 6, proName: "Zenith Form", build: 'HTML, CSS, Bootstrap, AngularJS', path: "./assets/projects/zenithform/index.html" },
@@ -43,7 +39,8 @@ let darkTheme = [
   { id: "4", colorVar: "--menuColor", colorCode: "#fff" },
   { id: "5", colorVar: "--headerColor", colorCode: "#27374D" },
   { id: "6", colorVar: "--hoverColor", colorCode: "#04364A" },
-  { id: "7", colorVar: "--borderColor", colorCode: "darkcyan" }
+  { id: "7", colorVar: "--borderColor", colorCode: "darkcyan" },
+  { id: "8", colorVar: "--selectColor", colorCode: "#30336b" },
 ];
 
 // show project details function
@@ -120,24 +117,30 @@ function mobileMenuToggle() {
   });
 }
 //  class remove with window resize event
-window.addEventListener("resize", function () {
-  if (window.innerWidth < 768) {
-    navbar.classList.remove("mobileWidth");
-  }
-});
+function windowResize() {
+  window.addEventListener("resize", function () {
+    if (window.innerWidth < 768) {
+      navbar.classList.remove("mobileWidth");
+    }
+  });
+}
 
 // class remove after menu clicked
-let menu = document.querySelectorAll(".menuList li");
-menu.forEach((ele) => {
-  ele.addEventListener("click", () => {
-    navbar.classList.remove("mobileWidth");
+function mobileMenuHide() {
+  let menu = document.querySelectorAll(".menuList li");
+  menu.forEach((ele) => {
+    ele.addEventListener("click", () => {
+      navbar.classList.remove("mobileWidth");
+    })
   })
-})
+}
 
 function init() {
   displayTableData()
   themeToggleFun()
   mobileMenuToggle()
+  windowResize()
+  mobileMenuHide()
 
 }
 init()

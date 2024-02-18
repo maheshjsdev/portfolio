@@ -1,8 +1,4 @@
 
-main {
-  position: relative;
-  z-index: 99;
-}
 /* Profile section */
 section.commonSection {
   display: flex;
@@ -84,60 +80,43 @@ h1.commonHeading {
 }
 /* skills section  */
 
-.slick-initialized .slick-slide{
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 20px 0;
-}
 .skillItem {
-  padding: 35px 20px;
-  text-align: center;
+  padding: 5px;
   border-radius: 15px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  width: 370px !important;
-  height: 350px !important;
+  width: 200px;
+  height: 190px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
   transition: all 0.3s ease-in-out;
   background-color: var(--parimeryColor);
+  cursor: pointer;
 }
-.skillItem:hover {
-  background-color: var(--hoverColor);
+.skillItem img {
+  width: 100%;
+  transition: all 0.3s ease-in-out;
 }
-
-.skillItem:hover h2.subHeading {
-  transform: translateY(-5px);
+.skillItem:hover img {
+  transform: scale(1.1);
 }
-.skillItem:hover .para {
-  transform: translateY(5px);
-}
-button.owl-prev {
-  position: absolute;
-  left: 51%;
-  bottom: 0;
-  transform: translateX(-51px);
-}
-
-button.owl-next {
-  position: absolute;
-  right: 50%;
-  bottom: 0;
-  transform: translateX(50px);
+.skillRow {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
 }
 
-button span {
-  font-size: 48px;
-  transition: all 200ms linear;
-  color: var(--textColor);
-}
-button span:hover {
-  color: grey;
-}
-.skill .subHeading {
-  text-transform: uppercase;
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 50px 0 0px 0;
 }
 
 /* Project section */

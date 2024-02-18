@@ -14,10 +14,7 @@ section#home {
   justify-content: center;
   padding-left: 25px;
 }
-h4.home-heading4 {
-  margin-left: 107px;
-  margin-bottom: -15px;
-}
+
 h4.heading4 {
   font-size: 25px;
   color: #61a734 !important;
@@ -232,10 +229,7 @@ section#farm-02 {
   height: 100%;
   padding: 0 150px;
 }
-.farm-right-02 h4.heading4 {
-  margin-left: 210px;
-  margin-bottom: 4px;
-}
+
 /* testimonials */
 section#testimonials {
   background-color: #f2f2f2;

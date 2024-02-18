@@ -14,21 +14,34 @@
         padding-left: 1rem;
         font-size: 14px;
     }
+
+    button.btn.btn-secondary.convertBtn {
+        margin-top: 21px;
+    }
+
+    .col-md-4.btnBlock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 </style>
 
 <body>
     <div class="container">
-        <h1>Currency Converter</h1>
+        <h1 class="my-3">Currency Converter</h1>
         <hr>
         <div class="row mt-3">
             <div class="col-md-12 mt-3">
                 <form>
                     <label>Amount to convert</label>
-                    <div class="col-md-4 my-2">
-                        <input type="number" name="amount" placeholder="Amount" class="form-control">
+                    <div class="row">
+                        <div class="col-md-4 my-2">
+                            <input type="number" name="amount" placeholder="Amount" class="form-control">
+                        </div>
                     </div>
                     <div class="row my-5">
                         <div class="col-md-4">
+                            <label class="my-2">From</label>
+
                             <select id="fromCurrency" class="form-select form-select-lg mb-3">
                                 <option value="">Select One …</option>
                                 <option value="USD">USD</option>
@@ -86,6 +99,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
+                            <label class="my-2">To</label>
                             <select id="toCurrency" class="form-select form-select-lg mb-3">
                                 <option value="">Select One …</option>
                                 <option value="USD">USD</option>
@@ -142,7 +156,7 @@
                                 <option value="ZAR">ZAR</option>
                             </select>
                         </div>
-                        <div class="col-md-4"><button class="btn btn-secondary convertBtn"
+                        <div class="col-md-4 btnBlock"><button class="btn btn-secondary convertBtn"
                                 type="submit">Convert</button></div>
                     </div>
 
@@ -151,7 +165,7 @@
             </div>
         </div>
 
-        <table class="table mt-5">
+        <table class="table my-5">
             <thead>
                 <tr>
                     <th scope="col">Country code</th>

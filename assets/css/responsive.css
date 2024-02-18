@@ -18,7 +18,7 @@
     transition: all 300ms ease-in-out;
     background-color: var(--hoverColor);
   }
-  
+
   nav.navbar.mobileWidth ul.menuList {
     position: fixed;
     top: 80px;
@@ -27,14 +27,14 @@
     opacity: 1;
     visibility: visible;
   }
- 
+
   nav.navbar i.fa.fa-bars.menuOpen {
     display: block;
   }
   nav.navbar.mobileWidth i.fa.fa-bars.menuOpen {
     display: none;
   }
-  
+
   nav.navbar.mobileWidth i.fa.fa-times.menuClose {
     display: block;
   }
@@ -59,11 +59,19 @@
   .subHeading {
     font-size: 22px;
   }
+  .skillRow {
+    gap: 20px;
+    flex-direction: column;
+  }
+  .skill {
+    gap: 20px;
+    padding: 50px 0 50px 0;
+  }
 }
 @media (max-width: 496px) {
   .headerContainer {
     padding: 0 10px;
-}
+  }
   /* profile section */
   .container {
     padding: 0px 10px;
@@ -101,14 +109,11 @@
     padding: 120px 0 0px 0;
   }
   section#projects {
-    padding: 45px 0 45px 0;
-}
+    padding-bottom:50px;
+  }
   /* skill section */
-  section#skill {
-    padding: 45px 0 0 0;
-  }
-  .skillItem {
-    width: 300px !important;
-    height: inherit;
-  }
+  /* .skill {
+    gap: 20px;
+    padding: 50px 0 50px 0;
+  } */
 }

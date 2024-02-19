@@ -1,10 +1,3 @@
-// Preloader
-// $(document).ready(function () {
-//   $(window).on("load", function () {
-//     $("img.loader").fadeOut();
-//     $("#preloader").delay(500).fadeOut();
-//   })
-// });
 
 // projectDetails in tableData 
 let tableData = [

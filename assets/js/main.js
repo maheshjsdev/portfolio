@@ -1,10 +1,10 @@
 // Preloader
-$(document).ready(function () {
-  $(window).on("load", function () {
-    $("img.loader").fadeOut();
-    $("#preloader").delay(500).fadeOut();
-  })
-});
+// $(document).ready(function () {
+//   $(window).on("load", function () {
+//     $("img.loader").fadeOut();
+//     $("#preloader").delay(500).fadeOut();
+//   })
+// });
 
 // projectDetails in tableData 
 let tableData = [
@@ -135,12 +135,24 @@ function mobileMenuHide() {
   })
 }
 
+
+// preloader function
+function preloader() {
+  window.addEventListener("load", function () {
+    let loader = document.querySelector("#preloader");
+    setTimeout(() => {
+      loader.style.display = "none"
+    },1000)
+  })
+}
+
 function init() {
   displayTableData()
   themeToggleFun()
   mobileMenuToggle()
   windowResize()
   mobileMenuHide()
+  preloader()
 
 }
 init()

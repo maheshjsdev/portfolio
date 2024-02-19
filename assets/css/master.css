@@ -50,7 +50,10 @@ body {
   background-color: var(--bgColor);
   scroll-behavior: smooth;
 }
-
+/* main{
+  position: relative;
+  z-index: 99;
+} */
 
 /* preloader */
 #preloader {
@@ -60,7 +63,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: azure;
-  z-index: 9999;
+  z-index: 99;
 }
 
 #preloader img.loader {
@@ -78,7 +81,7 @@ header {
   left: 0;
   right: 0;
   top: 0;
-  z-index: 99;
+  z-index: 9;
   display: flex;
   justify-content: center;
   align-items: center;

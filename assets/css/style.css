@@ -40,20 +40,20 @@ section.commonSection {
   gap: 18px;
   text-align: center;
 }
-p.profileCenterTxt {
-  font-size: 20px;
-  font-family: "Open Sans", sans-serif;
+.profileCenterTxt {
+  font-size: var(--paraSize20);
+  font-family: var(--fontFamily1);
 }
 .subHeading {
-  font-size: 24px;
-  font-family: "Josefin Sans", sans-serif;
+  font-size: var(--commonSubHead);
+  font-family: var(--fontFamily1);
   font-weight: 400;
   transition: all 0.3s ease-in-out;
   color: var(--textColor);
 }
 .para {
-  font-size: 16px;
-  font-family: "Open Sans", sans-serif;
+  font-size: var(--paraSize);
+  font-family:var(--fontFamily2);
   line-height: 30px;
   transition: all 0.3s ease-in-out;
   color: var(--textColor);
@@ -63,17 +63,18 @@ p.profileCenterTxt {
   flex-direction: column;
   gap: 8px;
 }
-h3.commonMiniHead {
-  font-size: 16px;
+.commonMiniHead {
+  font-size: var(--paraSize);
   font-weight: 700;
-  font-family: "Open Sans", sans-serif;
+  font-family:var(--fontFamily2);
   letter-spacing: 2px;
 }
-h1.commonHeading {
-  font-size: 48px;
+.commonHeading {
+  font-size: var(--commonHeadSize);
   font-weight: 400;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: var(--headingFontFamily);
   text-align: center;
+  letter-spacing: var(--letterSpace);
 }
 .profilePic {
   text-align: center;
@@ -83,7 +84,7 @@ h1.commonHeading {
 .skillItem {
   padding: 5px;
   border-radius: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px var(--cardBg);
   width: 200px;
   height: 190px;
   display: flex;
@@ -127,7 +128,7 @@ table {
   border-radius: 12px;
   border-collapse: collapse;
   margin-top: 50px;
-  background-color: var(--parimeryColor);
+  background-color: var(--tableBg);
 }
 thead tr {
   border-top: none;

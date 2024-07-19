@@ -1,20 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Bellota:wght@300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans:wght@300;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Shadow&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 :root {
-  --bgColor: #fff;
+  --bgColor: #ffffff;
   --parimeryColor: #fff;
   --textColor: #000;
   --selectColor: #ffdd59;
   --hoverColor: #d2e0fb;
   --hue-color: 230;
   --menuColor: #555;
-  --headerColor: #fff;
+  --headerBg: #f3f4f6;
   --borderColor: #ddd;
+  --menuTextSize: 18px;
+  --tableBg: rgba(239, 245, 246, .6);
+  --cardBg: rgba(0, 0, 0, 0.23);
+  --paraSize:16px;
+  --paraSize20:20px;
+  --commonSubHead:24px;
+  --commonHeadSize:48px;
+  --fontFamily1:"Josefin Sans", sans-serif;
+  --fontFamily2:"Open Sans", sans-serif;
+  --headingFontFamily:"Josefin Sans", sans-serif;
+  --letterSpace:1px;
 }
 /* html[data-theme='dark'] {
   --bgColor: hsl(var(--hue-color), 30%, 8%);
@@ -86,7 +98,7 @@ header {
   justify-content: center;
   align-items: center;
   height: 80px;
-  background-color: var(--headerColor);
+  background-color: var(--headerBg);
   border-bottom: 1.5px solid var(--borderColor);
 }
 img.logo {
@@ -125,11 +137,11 @@ li.menuItem a:hover {
 li.menuItem a {
   text-decoration: none;
   color: var(--textColor);
-  font-family: "Josefin Sans", sans-serif;
+  font-family:var(--fontFamily1);
   letter-spacing: 1px;
   transition: all 300ms linear;
   font-weight: 400;
-  font-size: 18px;
+  font-size: var(--menuTextSize);
   position: relative;
 }
 li.menuItem a:after {
@@ -190,4 +202,29 @@ nav.navbar i.fa.fa-bars.menuOpen {
 
 nav.navbar i.fa.fa-times.menuClose {
   display: none;
+}
+
+/* Scroll bar styling */
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.44, rgb(122, 153, 217)),
+    color-stop(0.72, rgb(73, 125, 189)),
+    color-stop(0.86, rgb(28, 58, 148))
+  );
 }
